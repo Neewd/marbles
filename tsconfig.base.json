@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@marbles/auth": ["libs/auth/src/index.ts"],
+      "@marbles/modal": ["libs/modal/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
