@@ -24,6 +24,12 @@ module.exports = {
         periwinkie: '#BCC0D4',
         lavenderGray: '#CECEDE',
       },
+      fontFamily: {
+        fredoka: ['"Fredoka One"', 'cursive'],
+        bloodorange: ['bloodorange'],
+        playfair: ['Playfair Display'],
+        inter: ['Inter'],
+      },
     },
   },
   plugins: [],

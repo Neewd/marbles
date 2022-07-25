@@ -1,15 +1,23 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
+<ng-template #connectWalletModalTemplate>
+  <em-login-modal></em-login-modal>
+</ng-template>
+
 <div class="relative bg-transparent z-10">
   <div
-    class="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10"
+    class="flex justify-between items-center px-8 py-6 sm:px-12 md:justify-start md:space-x-10"
   >
-    <div>
-      <a href="#" class="flex"> Elrond Marble </a>
+    <div class="flex justify-start lg:w-0 lg:flex-1">
+      <a class="w-24">
+        <span
+          class="font-bloodorange text-5xl font-bold whitespace-pre-line text-queenPink-800 leading-6"
+          >elrond marble</span
+        >
+      </a>
     </div>
     <div class="-mr-2 -my-2 md:hidden">
       <button
         type="button"
-        class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-queenPink-500"
+        class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
         aria-expanded="false"
       >
         <span class="sr-only">Open menu</span>
@@ -31,42 +39,51 @@
         </svg>
       </button>
     </div>
-    <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
-      <nav class="flex space-x-10">
-        <a
-          href="#"
-          class="text-base font-medium text-gray-500 hover:text-gray-900"
+    <nav class="hidden md:flex space-x-10">
+      <div class="relative">
+        <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
+        <button
+          type="button"
+          class="text-queenPink-700 font-bold group rounded-md inline-flex items-center text-lg font-inter hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          aria-expanded="false"
         >
-          Mint
-        </a>
-        <a
-          href="#"
-          class="text-base font-medium text-gray-500 hover:text-gray-900"
-        >
-          Team
-        </a>
-      </nav>
-      <div class="flex items-center md:ml-12">
-        <a
-          (click)="onConnectWallet()"
-          class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-queenPink-600 hover:bg-queenPink-700 hover:cursor-pointer"
-        >
-          Connect Wallet
-        </a>
+          <span>Mint</span>
+        </button>
       </div>
+
+      <a
+        href="#"
+        class="text-lg font-inter font-bold text-queenPink-700 hover:text-queenPink-900"
+      >
+        Team
+      </a>
+      <a
+        href="#"
+        class="text-lg font-inter font-bold text-queenPink-700 hover:text-queenPink-900"
+      >
+        Roadmap
+      </a>
+    </nav>
+    <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+      <button
+        (click)="onConnectWallet()"
+        class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-inter text-queenPink-100 bg-queenPink-600 hover:bg-queenPink-700 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-queenPink-600"
+      >
+        Connect Wallet
+      </button>
     </div>
   </div>
 
   <!--
-      Mobile menu, show/hide based on mobile menu state.
-  
-      Entering: "duration-200 ease-out"
-        From: "opacity-0 scale-95"
-        To: "opacity-100 scale-100"
-      Leaving: "duration-100 ease-in"
-        From: "opacity-100 scale-100"
-        To: "opacity-0 scale-95"
-    -->
+    Mobile menu, show/hide based on mobile menu state.
+
+    Entering: "duration-200 ease-out"
+      From: "opacity-0 scale-95"
+      To: "opacity-100 scale-100"
+    Leaving: "duration-100 ease-in"
+      From: "opacity-100 scale-100"
+      To: "opacity-0 scale-95"
+  -->
   <div
     class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
   >
@@ -85,7 +102,7 @@
           <div class="-mr-2">
             <button
               type="button"
-              class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-queenPink-500"
+              class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
             >
               <span class="sr-only">Close menu</span>
               <!-- Heroicon name: outline/x -->
@@ -108,13 +125,13 @@
           </div>
         </div>
         <div class="mt-6">
-          <nav class="grid gap-6">
+          <nav class="grid grid-cols-1 gap-7">
             <a
               href="#"
               class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
             >
               <div
-                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-queenPink-500 text-white"
+                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white"
               >
                 <!-- Heroicon name: outline/chart-bar -->
                 <svg
@@ -133,9 +150,6 @@
                   />
                 </svg>
               </div>
-              <div class="ml-4 text-base font-medium text-gray-900">
-                Analytics
-              </div>
             </a>
 
             <a
@@ -143,7 +157,7 @@
               class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
             >
               <div
-                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-queenPink-500 text-white"
+                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white"
               >
                 <!-- Heroicon name: outline/cursor-click -->
                 <svg
@@ -172,7 +186,7 @@
               class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
             >
               <div
-                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-queenPink-500 text-white"
+                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white"
               >
                 <!-- Heroicon name: outline/shield-check -->
                 <svg
@@ -201,7 +215,7 @@
               class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
             >
               <div
-                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-queenPink-500 text-white"
+                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white"
               >
                 <!-- Heroicon name: outline/view-grid -->
                 <svg
@@ -230,7 +244,7 @@
               class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
             >
               <div
-                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-queenPink-500 text-white"
+                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white"
               >
                 <!-- Heroicon name: outline/refresh -->
                 <svg
@@ -259,7 +273,7 @@
               class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
             >
               <div
-                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-queenPink-500 text-white"
+                class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white"
               >
                 <!-- Heroicon name: outline/document-report -->
                 <svg
@@ -291,23 +305,64 @@
             href="#"
             class="text-base font-medium text-gray-900 hover:text-gray-700"
           >
-            Mint
+            Pricing
           </a>
 
           <a
             href="#"
             class="text-base font-medium text-gray-900 hover:text-gray-700"
           >
-            Team
+            Docs
+          </a>
+
+          <a
+            href="#"
+            class="text-base font-medium text-gray-900 hover:text-gray-700"
+          >
+            Enterprise
+          </a>
+
+          <a
+            href="#"
+            class="text-base font-medium text-gray-900 hover:text-gray-700"
+          >
+            Help Center
+          </a>
+
+          <a
+            href="#"
+            class="text-base font-medium text-gray-900 hover:text-gray-700"
+          >
+            Guides
+          </a>
+
+          <a
+            href="#"
+            class="text-base font-medium text-gray-900 hover:text-gray-700"
+          >
+            Events
+          </a>
+
+          <a
+            href="#"
+            class="text-base font-medium text-gray-900 hover:text-gray-700"
+          >
+            Security
           </a>
         </div>
         <div class="mt-6">
           <a
-            (click)="onConnectWallet()"
-            class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-queenPink-600 hover:bg-queenPink-700"
+            href="#"
+            class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
           >
-            Connect Wallet
+            Sign up
           </a>
+          <p class="mt-6 text-center text-base font-medium text-gray-500">
+            Existing customer?
+            <a href="#" class="text-indigo-600 hover:text-indigo-500">
+              Sign in
+            </a>
+          </p>
         </div>
       </div>
     </div>
@@ -315,22 +370,3 @@
 </div>
 
 <canvas #canvasQRCode></canvas>
-
-<ng-template #connectWalletModalTemplate>
-  <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-    <div class="mt-2 grid grid-cols-2 grid-rows-2 gap-4">
-      <div class="h-32 w-32 border border-gray-400 rounded-lg">
-        Maiar DeFi Connect
-      </div>
-      <div class="h-32 w-632 border border-gray-400 rounded-lg">
-        Maiar DeFi Connect
-      </div>
-      <div class="h-32 w-32 border border-gray-400 rounded-lg">
-        Maiar DeFi Connect
-      </div>
-      <div class="h-32 w-32 border border-gray-400 rounded-lg">
-        Maiar DeFi Connect
-      </div>
-    </div>
-  </div>
-</ng-template>

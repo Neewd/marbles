@@ -11,9 +11,15 @@ import { environment } from '../environments/environment';
 import { AuthModule } from '@marbles/auth';
 import { ModalModule } from '@marbles/modal';
 import { GameComponent } from './game/game.component';
+import { LoginModalComponent } from './login-modal/login-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, GameComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    GameComponent,
+    LoginModalComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

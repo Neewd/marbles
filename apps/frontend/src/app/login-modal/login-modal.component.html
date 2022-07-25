@@ -1,0 +1,119 @@
+<div
+  class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-queenPink-700 sm:mx-0 sm:h-10 sm:w-10"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-5 w-5 text-queenPink-200"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+      clip-rule="evenodd"
+    />
+  </svg>
+</div>
+<div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left flex flex-col flex-1">
+  <h3 class="text-lg leading-6 font-medium text-queenPink-900" id="modal-title">
+    Connect your wallet
+  </h3>
+  <div class="mt-2">
+    <!--button
+      (click)="onLoginMaiarExtension()"
+      type="button"
+      class="inline-flex items-center p-1 border border-transparent rounded-lg shadow-sm text-queenPink-800 hover:outline-2 bg-queenPink-100 focus:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-queenPink-500 font-semibold"
+    >
+      <p>Maiar DeFi Connect</p>
+    </button>
+    <button
+      (click)="onLoginMaiarApp()"
+      class="h-32 w-full border border-gray-400 rounded-lg p-8 place-content-center grid text-center hover:cursor-pointer"
+    >
+      <p>Maiar App</p>
+    </button>
+    <button
+      (click)="onLoginLedger()"
+      class="h-32 w-full border border-gray-400 rounded-lg p-8 place-content-center grid text-center hover:cursor-pointer"
+    >
+      <p>Ledger</p>
+    </button>
+    <button
+      (click)="onLoginMaiarWebWallet()"
+      class="h-32 w-full border border-gray-400 rounded-lg p-8 place-content-center grid text-center hover:cursor-pointer"
+    >
+      <p>Elrond Web Wallet</p>
+    </button-->
+
+    <fieldset>
+      <legend class="sr-only">Server size</legend>
+      <div class="space-y-4">
+        <!--
+          Checked: "border-transparent", Not Checked: "border-gray-300"
+          Active: "border-indigo-500 ring-2 ring-indigo-500"
+        -->
+        <label
+          *ngFor="let loginOption of loginOptions"
+          [ngClass]="{
+            'ring-2': currentLoginOptionId === loginOption.id,
+            'ring-queenPink-500': currentLoginOptionId === loginOption.id,
+            'border-queenPink-500': currentLoginOptionId === loginOption.id,
+            'border-transparent': currentLoginOptionId === loginOption.id,
+            'border-gray-300': currentLoginOptionId !== loginOption.id
+          }"
+          (click)="onChoseLoginOption(loginOption.id)"
+          class="relative block bg-white border rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none"
+        >
+          <input
+            type="radio"
+            name="server-size"
+            value="{{ loginOption.title }}"
+            class="sr-only"
+            aria-labelledby="server-size-0-label"
+            aria-describedby="server-size-0-description-0 server-size-0-description-1"
+          />
+          <span class="flex items-center">
+            <span class="text-sm flex flex-col">
+              <span id="server-size-0-label" class="font-medium text-gray-900">
+                {{ loginOption.title }}
+              </span>
+            </span>
+          </span>
+          <span
+            id="server-size-0-description-1"
+            class="mt-2 flex text-sm sm:mt-0 sm:flex-col sm:ml-4 sm:text-right"
+          >
+            <svg
+              *ngIf="currentLoginOptionId === loginOption.id"
+              class="h-5 w-5 text-queenPink-600"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </span>
+          <!--
+            Active: "border", Not Active: "border-2"
+            Checked: "border-indigo-500", Not Checked: "border-transparent"
+          -->
+          <div
+            [ngClass]="{
+              border: currentLoginOptionId === loginOption.id,
+              'border-queenPink-500': currentLoginOptionId === loginOption.id,
+              'border-2': currentLoginOptionId !== loginOption.id,
+              'border-transparent': currentLoginOptionId !== loginOption.id
+            }"
+            class="absolute -inset-px rounded-lg border-2 pointer-events-none"
+            aria-hidden="true"
+          ></div>
+        </label>
+      </div>
+    </fieldset>
+  </div>
+</div>

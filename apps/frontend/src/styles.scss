@@ -2,4 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&display=swap');
+@import url('https://rsms.me/inter/inter.css');
+
+@font-face {
+  font-family: 'bloodorange';
+  src: local('bloodorange'),
+    url(./assets/fonts/bloodorange.otf) format('opentype');
+}

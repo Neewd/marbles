@@ -15,11 +15,10 @@ export class GameComponent implements AfterViewInit {
 
     // Scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color('white');
 
-    const geometry = new THREE.SphereGeometry(2);
+    const geometry = new THREE.SphereGeometry(2, 64, 64);
     const material = new THREE.MeshBasicMaterial({
-      color: 'blue',
+      color: '#753d53',
       wireframe: true,
     });
     const mesh = new THREE.Mesh(geometry, material);
@@ -27,7 +26,7 @@ export class GameComponent implements AfterViewInit {
 
     const sizes = {
       width: window.innerWidth,
-      height: 500,
+      height: 800,
     };
 
     // Camera
@@ -47,9 +46,11 @@ export class GameComponent implements AfterViewInit {
     // Renderer
     const renderer = new THREE.WebGLRenderer({
       canvas,
+      alpha: true,
     });
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
 
     // Animation
     const clock = new THREE.Clock();
