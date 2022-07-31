@@ -1,52 +1,35 @@
-import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { WalletConnectProvider } from '@elrondnetwork/erdjs-wallet-connect-provider';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  AuthEntity,
+  AuthState,
+  getAuthEntity,
+  getIsAuthenticated,
+} from '@marbles/auth';
 import { ModalService, ModalState, openModal } from '@marbles/modal';
 import { Store } from '@ngrx/store';
-import * as QRCode from 'qrcode';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'em-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
-  @ViewChild('canvasQRCode') canvasQRCodeRef!: ElementRef;
-
+export class NavbarComponent implements OnInit {
   @ViewChild('connectWalletModalTemplate')
   connectWalletModalTemplate!: TemplateRef<HTMLElement>;
 
+  authEntity$: Observable<AuthEntity>;
+  isAuthenticated$: Observable<boolean>;
+
   constructor(
     private modalService: ModalService,
-    private modalStore: Store<ModalState>
+    private modalStore: Store<ModalState>,
+    private authStore: Store<AuthState>
   ) {}
 
-  async onConnectWallet2(): Promise<void> {
-    const bridgeUrl = 'https://bridge.walletconnect.org';
-
-    const callbacks = {
-      onClientLogin: async function () {
-        const address = await provider.getAddress();
-        console.log('Address:', address);
-      },
-      onClientLogout: async function () {
-        console.log('onClientLogout()');
-      },
-    };
-
-    const provider = new WalletConnectProvider(bridgeUrl, callbacks);
-    const connectorUri = await provider.login();
-
-    const svgString = await QRCode.toString(connectorUri, { type: 'svg' });
-    const contextCanvas = this.canvasQRCodeRef.nativeElement.getContext('2d');
-    const DOMURL = window.URL || window.webkitURL || window;
-    const svgImage = new Image();
-    const svg = new Blob([svgString], { type: 'image/svg+xml' });
-    const url = DOMURL.createObjectURL(svg);
-    svgImage.onload = () => {
-      contextCanvas.drawImage(svgImage, 0, 0);
-      DOMURL.revokeObjectURL(url);
-    };
-    svgImage.src = url;
+  ngOnInit(): void {
+    this.authEntity$ = this.authStore.select(getAuthEntity);
+    this.isAuthenticated$ = this.authStore.select(getIsAuthenticated);
   }
 
   async onConnectWallet(): Promise<void> {

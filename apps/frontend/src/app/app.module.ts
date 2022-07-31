@@ -12,6 +12,8 @@ import { AuthModule } from '@marbles/auth';
 import { ModalModule } from '@marbles/modal';
 import { GameComponent } from './game/game.component';
 import { LoginModalComponent } from './login-modal/login-modal.component';
+import { MaiarAppLoginComponent } from './maiar-app-login-component/maiar-app-login.component';
+import { APP_CONFIG } from '@marbles/app-config';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
     NavbarComponent,
     GameComponent,
     LoginModalComponent,
+    MaiarAppLoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
     AuthModule,
     ModalModule,
   ],
-  providers: [],
+  providers: [{ provide: APP_CONFIG, useValue: environment }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

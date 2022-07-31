@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@marbles/auth": ["libs/auth/src/index.ts"],
+      "@marbles/app-config": ["libs/app-config/index.ts"],
       "@marbles/modal": ["libs/modal/src/index.ts"]
     }
   },

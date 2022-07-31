@@ -24,7 +24,8 @@
             "prefix": "em",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@angular-eslint/template/no-negated-async": false
       }
     },
     {

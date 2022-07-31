@@ -1,38 +1,59 @@
-import { Component, OnInit } from '@angular/core';
-
-interface LoginOption {
-  id: string;
-  title: string;
-}
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AuthState,
+  getIsAuthenticated,
+  getSelectedLoginOption,
+  login,
+  LoginOption,
+} from '@marbles/auth';
+import { closeModal } from '@marbles/modal';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'em-login-modal',
   templateUrl: './login-modal.component.html',
   styleUrls: ['./login-modal.component.scss'],
 })
-export class LoginModalComponent {
+export class LoginModalComponent implements OnInit {
+  @ViewChild('modalWrapper') modalWrapper!: ElementRef;
+
+  constructor(private authStore: Store<AuthState>) {}
+
+  currentLoginOption$: Observable<LoginOption>;
   loginOptions: LoginOption[] = [
     {
-      id: 'maiarExtension',
-      title: 'Maiar Extension',
+      id: 'maiarDefiWallet',
+      title: 'Maiar DeFi Wallet',
     },
     {
-      id: 'maiarWebWallet',
-      title: 'Maiar Web Wallet',
+      id: 'maiarApp',
+      title: 'Maiar App',
     },
     {
       id: 'ledger',
       title: 'Ledger',
     },
     {
-      id: 'maiarApp',
-      title: 'Maiar DeFi Connect',
+      id: 'maiarWebWallet',
+      title: 'Elrond Web Wallet',
     },
   ];
 
-  currentLoginOptionId!: string;
+  ngOnInit(): void {
+    this.currentLoginOption$ = this.authStore.select(getSelectedLoginOption);
+    this.authStore.select(getIsAuthenticated).subscribe((authenticated) => {
+      if (authenticated) {
+        this.authStore.dispatch(closeModal());
+      }
+    });
+  }
 
-  onChoseLoginOption(loginOptionId: string): void {
-    this.currentLoginOptionId = loginOptionId;
+  async onChosenLoginOption(loginOption: LoginOption): Promise<void> {
+    this.authStore.dispatch(login({ selectedLoginOption: loginOption }));
+  }
+
+  onGoBackButton(): void {
+    //this.currentLoginOption = null;
   }
 }

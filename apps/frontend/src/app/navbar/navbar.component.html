@@ -65,12 +65,18 @@
       </a>
     </nav>
     <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-      <button
-        (click)="onConnectWallet()"
-        class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-inter text-queenPink-100 bg-queenPink-600 hover:bg-queenPink-700 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-queenPink-600"
-      >
-        Connect Wallet
-      </button>
+      <ng-container *ngIf="!(isAuthenticated$ | async)">
+        <button
+          (click)="onConnectWallet()"
+          class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-inter text-queenPink-100 bg-queenPink-600 hover:bg-queenPink-700 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-queenPink-600"
+        >
+          Connect Wallet
+        </button>
+      </ng-container>
+
+      <div *ngIf="isAuthenticated$ | async">
+        {{ (authEntity$ | async)?.address }}
+      </div>
     </div>
   </div>
 
@@ -368,5 +374,3 @@
     </div>
   </div>
 </div>
-
-<canvas #canvasQRCode></canvas>

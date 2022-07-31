@@ -25,16 +25,4 @@ describe('AuthEffects', () => {
 
     effects = TestBed.inject(AuthEffects);
   });
-
-  describe('init$', () => {
-    it('should work', () => {
-      actions = hot('-a-|', { a: AuthActions.initAuth() });
-
-      const expected = hot('-a-|', {
-        a: AuthActions.loadAuthSuccess({ auth: [] }),
-      });
-
-      expect(effects.init$).toBeObservable(expected);
-    });
-  });
 });
