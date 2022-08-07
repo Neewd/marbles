@@ -3,4 +3,7 @@
  */
 export interface AuthEntity {
   address: string;
+  nonce?: number;
+  addressIndex?: number;
+  balance?: string;
 }

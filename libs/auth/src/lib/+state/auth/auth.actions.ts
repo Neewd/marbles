@@ -1,10 +1,21 @@
 import { createAction, props } from '@ngrx/store';
+import { AccountInfo, LoginInfo } from '../../services/login.service';
 import { AuthEntity } from './auth.models';
 import { LoginOption } from './login-option.models';
 
 export const login = createAction(
   '[Auth Page] Login init',
   props<{ selectedLoginOption: LoginOption }>()
+);
+
+// Load the login data from the local storage
+export const loadLocalStorageData = createAction(
+  '[Auth Page] Load local storage data'
+);
+
+export const loadLocalStorageDataSuccess = createAction(
+  '[Auth Page] Load local storage data success',
+  props<{ loginData: LoginInfo | null, accountData: AccountInfo | null }>()
 );
 
 export const loginFailed = createAction('[Auth Page] Login failed');

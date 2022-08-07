@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   AuthState,
   getIsAuthenticated,
+  getLoginOptions,
   getSelectedLoginOption,
   login,
   LoginOption,
@@ -21,27 +22,11 @@ export class LoginModalComponent implements OnInit {
   constructor(private authStore: Store<AuthState>) {}
 
   currentLoginOption$: Observable<LoginOption>;
-  loginOptions: LoginOption[] = [
-    {
-      id: 'maiarDefiWallet',
-      title: 'Maiar DeFi Wallet',
-    },
-    {
-      id: 'maiarApp',
-      title: 'Maiar App',
-    },
-    {
-      id: 'ledger',
-      title: 'Ledger',
-    },
-    {
-      id: 'maiarWebWallet',
-      title: 'Elrond Web Wallet',
-    },
-  ];
+  loginOptions$: Observable<LoginOption[]>;
 
   ngOnInit(): void {
     this.currentLoginOption$ = this.authStore.select(getSelectedLoginOption);
+    this.loginOptions$ = this.authStore.select(getLoginOptions);
     this.authStore.select(getIsAuthenticated).subscribe((authenticated) => {
       if (authenticated) {
         this.authStore.dispatch(closeModal());
@@ -54,6 +39,6 @@ export class LoginModalComponent implements OnInit {
   }
 
   onGoBackButton(): void {
-    //this.currentLoginOption = null;
+    this.authStore.dispatch(login({ selectedLoginOption: null }));
   }
 }

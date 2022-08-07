@@ -33,3 +33,18 @@ export const getAuthEntity = createSelector(
   getAuthState,
   (state: AuthState) => state.authEntity
 );
+
+export const getAppInitialized = createSelector(
+  getAuthState,
+  (state: AuthState) => state.appInitialized
+);
+
+export const getLoginStarted = createSelector(
+  getAuthState,
+  (state: AuthState) => state.loginStarted
+);
+
+export const getLoginOptions = createSelector(
+  getAuthState,
+  (state: AuthState) => state.loginOptions
+);

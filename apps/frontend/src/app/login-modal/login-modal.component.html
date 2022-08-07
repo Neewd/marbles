@@ -59,7 +59,7 @@
       <legend class="sr-only">Login options</legend>
       <div class="space-y-4">
         <div
-          *ngFor="let loginOption of loginOptions"
+          *ngFor="let loginOption of loginOptions$ | async"
           [id]="loginOption.id"
           (click)="onChosenLoginOption(loginOption)"
           class="block bg-white border rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none transition-transform hover:outline hover:outline-offset-2 hover:outline-2 hover:outline-queenPink-500"

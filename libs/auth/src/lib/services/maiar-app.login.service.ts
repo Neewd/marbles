@@ -12,25 +12,18 @@ export const CANVAS_QR_CODE_REF_ID = 'canvasQRCodeRef';
 
 @Injectable()
 export class MaiarAppLoginService implements LoginService {
+  bridgeUrl: string;
   qrCodeDrawTimer = 0;
+  provider: WalletConnectProvider;
 
   constructor(
     @Inject(APP_CONFIG) private appConfig: any,
     private authStore: Store<AuthState>
-  ) {}
-  async login(): Promise<string> {
-    return await this.onConnectMaiarApp();
-  }
-  logout(): void {
-    throw new Error('Method not implemented.');
-  }
-
-  private async onConnectMaiarApp(): Promise<string> {
-    const bridgeUrl = this.appConfig.walletConnectBridgeUrl;
-
+  ) {
+    this.bridgeUrl = this.appConfig.walletConnectBridgeUrl;
     const callbacks = {
       onClientLogin: async () => {
-        const address = await provider.getAddress();
+        const address = await this.provider.getAddress();
         const authEntity: AuthEntity = {
           address,
         };
@@ -40,9 +33,18 @@ export class MaiarAppLoginService implements LoginService {
         this.authStore.dispatch(logout());
       },
     };
+    this.provider = new WalletConnectProvider(this.bridgeUrl, callbacks);
+  }
+  async login(): Promise<string> {
+    return await this.onConnectMaiarApp();
+  }
 
-    const provider = new WalletConnectProvider(bridgeUrl, callbacks);
-    const connectorUri = await provider.login();
+  async logout(): Promise<void> {
+    await this.provider.logout();
+  }
+
+  private async onConnectMaiarApp(): Promise<string> {
+    const connectorUri = await this.provider.login();
     return await QRCode.toString(connectorUri, { type: 'svg' });
   }
 }
