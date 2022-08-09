@@ -3,6 +3,6 @@ import { WALLET_PROVIDER_MAINNET } from "@elrondnetwork/erdjs-web-wallet-provide
 export const environment = {
   production: true,
   walletConnectBridgeUrl: 'https://bridge.walletconnect.org',
-  callbackUrl: 'http://localhost:4200',
+  callbackUrl: 'https://marbles-tau.vercel.app/',
   walletProviderUrl: WALLET_PROVIDER_MAINNET
 };
