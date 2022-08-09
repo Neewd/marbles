@@ -11,6 +11,7 @@ export interface AuthState {
   appInitialized: boolean; // Whether the data for the app to be initialized has been retrieved
   authEntity: AuthEntity | null; // Represent the info of the logged in user
   error?: string | null; // last known error (if any)
+  ledgerAddresses?: string[] | null
   loaded: boolean; // has the Auth list been loaded
   loginOptions?: LoginOption[];
   loginStarted: boolean | null; // Has the login started
@@ -25,6 +26,7 @@ export interface AuthPartialState {
 export const initialAuthState: AuthState = {
   appInitialized: false,
   authEntity: null,
+  ledgerAddresses: null,
   loaded: false,
   loginOptions: [
     {
@@ -100,7 +102,7 @@ const reducer = createReducer(
     if (loginData) {
       selectedLoginOption = state.loginOptions?.find(loginOption => loginOption.id === loginData.loginOption);
     }
-    
+
     return {
       ...state,
       appInitialized: true,

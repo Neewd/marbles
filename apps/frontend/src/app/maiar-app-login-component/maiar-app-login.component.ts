@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   AuthState,
   CANVAS_QR_CODE_REF_ID,
-  getSVGQrCode,
-  MaiarAppLoginService,
+  getSVGQrCode
 } from '@marbles/auth';
 import { Store } from '@ngrx/store';
 

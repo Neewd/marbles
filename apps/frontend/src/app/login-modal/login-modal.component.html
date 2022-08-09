@@ -88,5 +88,11 @@
     >
       <em-maiar-app-login></em-maiar-app-login>
     </div>
+    <div
+      *ngIf="(currentLoginOption$ | async)?.id === 'ledger'"
+      class="flex justify-center items-center"
+    >
+      <em-maiar-ledger-login></em-maiar-ledger-login>
+    </div>
   </div>
 </div>

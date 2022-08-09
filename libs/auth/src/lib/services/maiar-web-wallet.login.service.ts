@@ -9,6 +9,9 @@ import { LoginService } from './login.service';
 export class MaiarWebWalletLoginService implements LoginService {
   provider: WalletProvider;
   callbackUrl: string;
+
+  readonly WAIT_CALLBACK_TIMEOUT: number = 500;
+
   constructor(
     @Inject(APP_CONFIG) private appConfig: any,
     private authStore: Store<AuthState>
@@ -19,7 +22,7 @@ export class MaiarWebWalletLoginService implements LoginService {
   async login(): Promise<void> {
     setTimeout(async () => {
       await this.provider.login({ callbackUrl: this.callbackUrl });
-    }, 1000);
+    }, this.WAIT_CALLBACK_TIMEOUT);
   }
   async logout(): Promise<void> {
     await this.provider.logout({ callbackUrl: this.callbackUrl });

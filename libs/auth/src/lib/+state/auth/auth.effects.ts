@@ -14,6 +14,8 @@ import {
 import { AuthService } from '../../services/auth.service';
 import {
   MaiarAppLoginService,
+  MaiarLedgerLoginService,
+  MaiarWebExtensionLoginService,
   MaiarWebWalletLoginService,
 } from '../../services';
 
@@ -29,7 +31,9 @@ export class AuthEffects {
     private readonly actions$: Actions,
     private readonly authService: AuthService,
     private maiarAppLoginService: MaiarAppLoginService,
-    private maiarWebWalletLoginService: MaiarWebWalletLoginService
+    private maiarWebWalletLoginService: MaiarWebWalletLoginService,
+    private maiarWebExtensionLoginService: MaiarWebExtensionLoginService,
+    private maiarLedgerLoginService: MaiarLedgerLoginService,
   ) {}
 
   appInitialization = createEffect(() =>
@@ -93,6 +97,61 @@ export class AuthEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  loginMaiarWebExtension$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.login),
+        withLatestFrom(this.authStore.select(getSelectedLoginOption)),
+        filter(
+          ([_, selectedLoginOption]) =>
+            selectedLoginOption?.id === 'maiarDefiWallet'
+        ),
+        tap(async () => {
+          try {
+            await this.maiarWebExtensionLoginService.login();
+          } catch(error) {
+            // Do nothing or show you have to provide the extension login
+          }
+        })
+      ),
+    { dispatch: false }
+  );
+
+  getLedgerAddresses$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.login),
+        withLatestFrom(this.authStore.select(getSelectedLoginOption)),
+        filter(
+          ([_, selectedLoginOption]) =>
+            selectedLoginOption?.id === 'ledger'
+        ),
+        mergeMap(() => {
+          return from(this.maiarLedgerLoginService.getAddresses()).pipe(
+            map((addresses) =>
+              AuthActions.maiarLedgerGetAddressesSuccess({ addresses })
+            ),
+            catchError((error) => of(AuthActions.maiarLedgerGetAddressesFailure({ error })))
+          );
+        })
+      )
+  );
+
+  lgoinLedger$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.maiarLedgerLogin),
+        mergeMap((action) => {
+          return from(this.maiarLedgerLoginService.login(action.address)).pipe(
+            map((address) =>
+              AuthActions.loginSuccess({ authEntity: { address} })
+            ),
+            catchError((error) => of(AuthActions.loginFailed()))
+          );
+        })
+      )
   );
 
   logoutMaiarApp$ = createEffect(

@@ -36,7 +36,6 @@ export class NavbarComponent implements OnInit {
   dropdownOpened: boolean = false;
   isAuthenticated$: Observable<boolean>;
 
-
   constructor(
     private modalService: ModalService,
     private modalStore: Store<ModalState>,

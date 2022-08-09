@@ -48,3 +48,8 @@ export const getLoginOptions = createSelector(
   getAuthState,
   (state: AuthState) => state.loginOptions
 );
+
+export const getLedgerAddresses = createSelector(
+  getAuthState,
+  (state: AuthState) => state.ledgerAddresses
+);

@@ -14,7 +14,7 @@ export interface AccountInfo {
 }
 
 export interface LoginService {
-  login(): void;
+  login(address?: string): void;
 
   logout(): void;
 

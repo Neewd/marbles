@@ -5,8 +5,12 @@ import { StoreModule } from '@ngrx/store';
 import { AuthEffects } from './+state/auth/auth.effects';
 import * as fromAuth from './+state/auth/auth.reducer';
 import { AuthService } from './services/auth.service';
-import { MaiarAppLoginService } from './services/maiar-app.login.service';
-import { MaiarWebWalletLoginService } from './services/maiar-web-wallet.login.service';
+import {
+  MaiarWebExtensionLoginService,
+  MaiarWebWalletLoginService,
+  MaiarAppLoginService,
+  MaiarLedgerLoginService,
+} from './services';
 
 @NgModule({
   imports: [
@@ -14,6 +18,12 @@ import { MaiarWebWalletLoginService } from './services/maiar-web-wallet.login.se
     StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.authReducer),
     EffectsModule.forFeature([AuthEffects]),
   ],
-  providers: [MaiarAppLoginService, MaiarWebWalletLoginService, AuthService],
+  providers: [
+    MaiarAppLoginService,
+    MaiarWebWalletLoginService,
+    MaiarWebExtensionLoginService,
+    MaiarLedgerLoginService,
+    AuthService,
+  ],
 })
 export class AuthModule {}

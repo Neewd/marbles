@@ -1,0 +1,5 @@
+<div *ngFor="let address of addresses$ | async">
+    <div (click)="onLoginAddress(address)">
+        {{ address }}
+    </div>
+</div>

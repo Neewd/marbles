@@ -17,6 +17,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { MaiarAppLoginComponent } from './maiar-app-login-component/maiar-app-login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddressCropperPipe } from './pipes/address-cropper.pipe';
+import { MaiarLedgerLoginComponent } from './maiar-ledger-login/maiar-ledger-login.component';
 
 const routes: Routes = [];
 
@@ -28,6 +29,7 @@ const routes: Routes = [];
     LoginModalComponent,
     MaiarAppLoginComponent,
     AddressCropperPipe,
+    MaiarLedgerLoginComponent,
   ],
   imports: [
     BrowserModule,

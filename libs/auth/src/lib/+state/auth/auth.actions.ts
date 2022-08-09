@@ -20,6 +20,7 @@ export const loadLocalStorageDataSuccess = createAction(
 
 export const loginFailed = createAction('[Auth Page] Login failed');
 
+// Maiar App Login
 export const maiarAppLoginSuccess = createAction(
   '[Auth/API] Maiar App Login success',
   props<{ svgQrCode: string }>()
@@ -29,6 +30,23 @@ export const maiarAppLoginFailure = createAction(
   '[Auth/API] Maiar App Login failure',
   props<{ error: string }>()
 );
+
+// Maiar Ledger Login
+export const maiarLedgerGetAddressesSuccess = createAction(
+  '[Auth/API] Maiar Ledger Get addresses success',
+  props<{ addresses: string[] | null }>()
+);
+
+export const maiarLedgerGetAddressesFailure = createAction(
+  '[Auth/API] Maiar Ledger Get addresses failure',
+  props<{ error: string }>()
+);
+
+export const maiarLedgerLogin = createAction(
+  '[Auth/API] Maiar Ledger login',
+  props<{ address: string }>()
+);
+
 
 export const loginSuccess = createAction(
   '[Auth/API] Login success',
